@@ -31,7 +31,8 @@ void Aircraft::prepare(){
   }else{
     /* Prepare the cockpit for flight operation */
     this->cockpit.prepare();
-        
+    while(!this->cockpit.isOperational());
+    
     /* print out the operational status */
     Serial.println("Aircraft operational.");
     this->operational = true;  
@@ -55,4 +56,7 @@ void Aircraft::operate(){
     IMU.readGyroscope(this->rotationX, 
         this->rotationY, this->rotationZ);
   }
+
+  /* operate the cockpit */
+  this->cockpit.operate();
 }
